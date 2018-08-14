@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off">
+    <Properties>
+        <Property name="loglayout">%d{yyyy/MM/dd HH:mm:ss.SSS}, %-5p, [%t], %c{1}, %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${loglayout}"/>
+        </Console>
+        <RollingFile name="rollingfile"
+                             fileName="training01.log"
+                             filePattern="training01_%d{yyyyMMdd}-%i.log">
+        	<PatternLayout pattern="${loglayout}" />
+        	<Policies>
+        		<OnStartupTriggeringPolicy />
+        		<SizeBasedTriggeringPolicy size="20MB" />
+        		<TimeBasedTriggeringPolicy />
+        	</Policies>
+        	<DefaultRolloverStrategy max="20" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="trace" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="rollingfile" />
+        </Root>
+    </Loggers>
+</Configuration>
